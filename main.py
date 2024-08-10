@@ -16,6 +16,22 @@ def calculate_distance(ip1, ip2):
     lat2, lon2 = res2.latitude, res2.longitude
     return distance((lat1, lon1), (lat2, lon2)).km
 
+def get_distance_from_location(ip, lat, lon):
+    res = DbIpCity.get(ip)
+    ip_lat, ip_lon = res.latitude, res.longitude
+    return distance((ip_lat, ip_lon), (lat, lon)).km
+
+def calculate_distance_from_server():
+    server_ip = input("Server's IP: ")
+    lat = float(input("Your Latitude: "))
+    lng = float(input("Your Longitude: "))
+
+    dist = get_distance_from_location(server_ip, lat, lng)
+    print(f"Distance between the server and your location is {dist} km")
+
+# Call the function
+calculate_distance_from_server()
+
 #ip to geo
 ip_add = input("Enter IP: ")  # 198.35.26.96
 printDetails(ip_add)
